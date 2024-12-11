@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التواصل معنا</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* لون متدرج */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, textarea, button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 500px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>التواصل معنا</h1>
+        <p>نحن هنا لمساعدتك والإجابة على استفساراتك. لا تتردد في التواصل معنا.</p>
+        <form id="contactForm" onsubmit="return validateForm()">
+            <input type="text" id="name" placeholder="الاسم" maxlength="50" required>
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+            <textarea id="message" placeholder="رسالتك" maxlength="500" required></textarea>
+            <br>
+            <button type="submit">إرسال</button>
+            <div id="error" class="error"></div>
+        </form>
+        <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+        <h2>التعليقات</h2>
+        <form id="commentForm" onsubmit="return validateComment()">
+            <textarea id="comment" placeholder="اكتب تعليقك هنا" maxlength="200" required></textarea>
+            <br>
+            <button type="submit">إرسال التعليق</button>
+            <div id="commentError" class="error"></div>
+        </form>
+        <center>
+            <a  href="https://www.google.com/maps/place/Al+Basit+School+%D9%85%D8%AF%D8%B1%D8%B3%D8%A9+%D8%A7%D9%84%D8%A8%D8%A7%D8%B3%D8%B7%E2%80%AD/@23.7058569,57.9162483,17z/data=!3m1!4b1!4m6!3m5!1s0x3e8dc49d6207168b:0xb527ac83e619bc3!8m2!3d23.7058569!4d57.9162483!16s%2Fg%2F11g6yzmr3p?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D"> <img src="image_video/pngtree-3d-location-icon-design-symbol-png-transparent-background-png-image_4562236.png"  width="200" height="100" ></a>
+        </center>
+        <div id="commentsList"></div>
+        <h2>الأسئلة المتكررة</h2>
+        <div id="faq">
+            <p><strong>س: كيف يمكنني التواصل مع المدرسة؟</strong></p>
+            <p>ج: يمكنك ملء نموذج التواصل أو إرسال رسالة عبر البريد الإلكتروني.</p>
+            <p><strong>س: ما هي ساعات العمل؟</strong></p>
+            <p>ج: ساعات العمل من الأحد إلى الخميس من الساعة 7 صباحًا حتى 12 مساءً.</p>
+        </div>
+        <button onclick="window.location.href='index.html'">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const error = document.getElementById('error');
+
+            if (name.length < 1 || email.length < 1 || message.length < 1) {
+                error.textContent = "الرجاء إدخال جميع الحقول.";
+                return false;
+            }
+
+            if (message.length > 500) {
+                error.textContent = "لا يمكن أن تتجاوز الرسالة 500 حرف.";
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateComment() {
+            const comment = document.getElementById('comment').value;
+            const commentError = document.getElementById('commentError');
+
+            if (comment.length < 1) {
+                commentError.textContent = "الرجاء كتابة تعليق.";
+                return false;
+            }
+
+            if (comment.length > 200) {
+                commentError.textContent = "لا يمكن أن يتجاوز التعليق 200 حرف.";
+                return false;
+            }
+
+            const commentList = document.getElementById('commentsList');
+            const commentItem = document.createElement('p');
+            commentItem.textContent = comment;
+            commentList.appendChild(commentItem);
+
+            document.getElementById('commentForm').reset();
+            commentError.textContent = "";
+
+            return false;
+        }
+
+        function initMap() {
+            var schoolLocation = { lat: 23.614328, lng: 58.545284 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: schoolLocation
+            });
+            var marker = new google.maps.Marker({
+                position: schoolLocation,
+                map: map
+            });
+        }
+
+        window.onload = function() {
+            const script = document.createElement('script');
+            script.src = `https://www.google.com/maps/place/Al+Basit+School+%D9%85%D8%AF%D8%B1%D8%B3%D8%A9+%D8%A7%D9%84%D8%A8%D8%A7%D8%B3%D8%B7%E2%80%AD/@23.7058569,57.9162483,17z/data=!3m1!4b1!4m6!3m5!1s0x3e8dc49d6207168b:0xb527ac83e619bc3!8m2!3d23.7058569!4d57.9162483!16s%2Fg%2F11g6yzmr3p?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D`;
+            script.async = true;
+            script.defer = true;
+            document.body.appendChild(script);
+        };
+    </script>
+</body>
+</html>

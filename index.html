@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة الباسط - الصفحة الرئيسية</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* لون متدرج */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        nav a {
+            background-color: #feb47b;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+        }
+        nav a:hover {
+            background-color: #fff;
+            color: #333;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مرحبًا بك في موقع مدرسة الباسط</h1>
+        <p>معلومات عامة عن المدرسة</p>
+        <form id="loginForm" onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="اسم المستخدم" maxlength="20" required>
+            <input type="password" id="password" placeholder="كلمة المرور" maxlength="20" required>
+            <br>
+            <button type="button" onclick="clearForm()">مسح</button>
+            <button type="submit">دخول</button>
+            <div id="error" class="error"></div>
+        </form>
+        <nav>
+            <a href="التربية الاسلامية.html">التربية الإسلامية</a>
+            <a href="اللغة العربية.html">اللغة العربية</a>
+            <a href="العلوم.html">العلوم</a>
+            <a href="الرياضيات.html">الرياضيات</a>
+            <a href="التواصل معنا.html">التواصل معنا</a>
+        </nav>
+    </div>
+
+    <script>
+        function clearForm() {
+            document.getElementById('loginForm').reset();
+        }
+
+        function validateForm() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('error');
+
+            if (username.length < 1 || password.length < 1) {
+                error.textContent = "الرجاء إدخال جميع الحقول.";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
